@@ -100,4 +100,19 @@ spec:
         name: test-deploy
       workspaces:
         - name: source
-          workspace: pfs-shared-data    
+          workspace: pfs-shared-data
+    
+    - name: gitops
+      runAfter:
+        - test-deploy
+      taskRef:
+        kind: Task
+        name: gitops
+      params:
+        - name: app-name
+          value: myTestApp
+        - name: sha
+          value: "$(tasks.clone-repository.results.commit)"
+      workspaces:
+        - name: source
+          workspace: pfs-shared-data         
