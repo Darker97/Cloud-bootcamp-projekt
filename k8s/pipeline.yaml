@@ -1,0 +1,29 @@
+# pipeline.yaml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    app.openshift.io/runtime: nodejs
+  name: pfs-pipeline
+spec:
+  params:
+    - name: source-repo
+      type: string
+      description: Source repository name
+      default: https://github.com/account-name/repo-name
+  workspaces:
+    - name: pfs-shared-data
+      description: |
+        This workspace stores the cloned repository and is available to all steps
+  tasks:
+    - name: clone-repository
+      params:
+        - name: url
+          value: "$(params.source-repo)"
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: pfs-shared-data
+
