@@ -70,4 +70,19 @@ spec:
         - name: source
           workspace: pfs-shared-data
     
-    
+    - name: kustomize-build
+      runAfter:
+        - build-image
+      params:
+        - name: app-namespace
+          value: christian-baltzer-project
+        - name: app-name
+          value: ProjectApp
+        - name: image-with-tag
+          value: "$(params.image-repo):$(tasks.clone-repository.results.commit)"
+      taskRef:
+        kind: Task
+        name: kustomize-build
+      workspaces:
+        - name: source
+          workspace: pfs-shared-data
