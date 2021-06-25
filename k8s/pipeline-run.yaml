@@ -10,6 +10,8 @@ spec:
   params:
     - name: source-repo
       value: https://github.com/Darker97/Cloud-bootcamp-projekt
+    - name: image-repo
+      value: quay.io/darker/projectquay
   workspaces:
     - name: pfs-shared-data
       volumeClaimTemplate:

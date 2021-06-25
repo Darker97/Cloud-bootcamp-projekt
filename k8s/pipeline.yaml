@@ -11,6 +11,10 @@ spec:
       type: string
       description: Source repository name
       default: https://github.com/account-name/repo-name
+    - name: image-repo
+      type: string
+      description: Docker image name
+      default: quay.io/account-name/repo-name
   workspaces:
     - name: pfs-shared-data
       description: |
@@ -52,3 +56,18 @@ spec:
         - name: ARGS
           value:
             - test
+    
+    - name: build-image
+      runAfter:
+        - run-tests
+      params:
+        - name: IMAGE
+          value: "$(params.image-repo):$(tasks.clone-repository.results.commit)"
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: pfs-shared-data
+    
+    
