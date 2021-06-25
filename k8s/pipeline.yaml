@@ -92,9 +92,9 @@ spec:
         - kustomize-build
       params:
         - name: app-namespace
-          value: christian-pipeline-from-scratch
+          value: christian-baltzer-project
         - name: app-name
-          value: myTestApp
+          value: ProjectApp
       taskRef:
         kind: Task
         name: test-deploy
