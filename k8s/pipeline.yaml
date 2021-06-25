@@ -39,3 +39,16 @@ spec:
         - name: ARGS
           value:
             - clean-install
+
+    - name: run-tests
+      runAfter:
+        - install-dependencies
+      taskRef:
+        name: npm
+      workspaces:
+        - name: source
+          workspace: pfs-shared-data
+      params:
+        - name: ARGS
+          value:
+            - test
