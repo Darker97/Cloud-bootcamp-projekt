@@ -86,3 +86,18 @@ spec:
       workspaces:
         - name: source
           workspace: pfs-shared-data
+    
+    - name: test-deploy
+      runAfter:
+        - kustomize-build
+      params:
+        - name: app-namespace
+          value: christian-pipeline-from-scratch
+        - name: app-name
+          value: myTestApp
+      taskRef:
+        kind: Task
+        name: test-deploy
+      workspaces:
+        - name: source
+          workspace: pfs-shared-data    
