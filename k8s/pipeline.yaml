@@ -27,3 +27,15 @@ spec:
         - name: output
           workspace: pfs-shared-data
 
+    - name: install-dependencies
+      runAfter:
+        - clone-repository
+      taskRef:
+        name: npm
+      workspaces:
+        - name: source
+          workspace: pfs-shared-data
+      params:
+        - name: ARGS
+          value:
+            - clean-install
