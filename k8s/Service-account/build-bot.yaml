@@ -4,6 +4,6 @@ kind: ServiceAccount
 metadata:
   name: build-bot
 secrets:
-  - name: quay-io-christian-baltzer-password
+  - name: quay-io-christian-baltzer-password-project
 imagePullSecrets:
-  - name: quay-io-christian-baltzer-password
+  - name: quay-io-christian-baltzer-password-project
